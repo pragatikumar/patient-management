@@ -9,23 +9,24 @@ import java.time.LocalDate;
 public class PatientMapper {
 
     public static PatientResponseDTO toDTO(Patient patient) {
-        PatientResponseDTO patientDTO = new PatientResponseDTO();
-        patientDTO.setId(patient.getId().toString());
-        patientDTO.setName(patient.getName());
-        patientDTO.setAddress(patient.getAddress());
-        patientDTO.setEmail(patient.getEmail());
-        patientDTO.setDateOfBirth(patient.getDateOfBirth().toString());
 
-        return patientDTO;
+        return PatientResponseDTO.builder()
+                .id(patient.getId().toString())
+                .name(patient.getName())
+                .address(patient.getAddress())
+                .email(patient.getEmail())
+                .dateOfBirth(patient.getDateOfBirth().toString())
+                .build();
     }
 
     public static Patient toModel(PatientRequestDTO patientRequestDTO) {
-        Patient newPatient = new Patient();
-        newPatient.setName(patientRequestDTO.getName());
-        newPatient.setAddress(patientRequestDTO.getAddress());
-        newPatient.setEmail(patientRequestDTO.getEmail());
-        newPatient.setDateOfBirth(LocalDate.parse(patientRequestDTO.getDateOfBirth()));
-        newPatient.setRegisteredDate(LocalDate.parse(patientRequestDTO.getRegisteredDate()));
-        return newPatient;
+
+        return Patient.builder()
+                .name(patientRequestDTO.getName())
+                .address(patientRequestDTO.getAddress())
+                .email(patientRequestDTO.getEmail())
+                .dateOfBirth(LocalDate.parse(patientRequestDTO.getDateOfBirth()))
+                .registeredDate(LocalDate.parse(patientRequestDTO.getRegisteredDate()))
+                .build();
     }
 }
